@@ -5,6 +5,7 @@ export interface UsersAttributes {
   name: string;
   email: string;
   cpf?: string;
+  number: string;
   password: string;
   zipcode: string;
   isActive: boolean;
