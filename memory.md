@@ -59,6 +59,7 @@ Este documento registra o estado atual e as funcionalidades da API de produtivid
 
 - **Iniciar Servidor:** `npm run dev`
 - **Fazer o Build:** `npm run build`
+- **Fazer o Build:** `npm run build`
 
 ## ✅ Progresso Atual
 
