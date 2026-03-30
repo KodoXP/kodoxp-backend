@@ -6,6 +6,7 @@ class User extends Model<UsersAttributes, UsersCreate> {
   public id!: string;
   public name!: string;
   public cpf!: string;
+  public number!: string;
   public password!: string;
   public zipcode!: string;
   public email!: string;
@@ -33,6 +34,13 @@ User.init(
       allowNull: false,
       validate: {
         isEmail: true,
+      },
+    },
+    number: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [10, 15],
       },
     },
     cpf: {
