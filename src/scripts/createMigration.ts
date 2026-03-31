@@ -4,6 +4,10 @@ import path from "path";
 const migrationsDir = path.join(__dirname, "../migrations");
 
 function generateMigration(name: string) {
+  if (!fs.existsSync(migrationsDir)) {
+    fs.mkdirSync(migrationsDir, { recursive: true });
+  }
+
   const timestamp = new Date().toISOString().replace(/[-T:.Z]/g, "");
   const filename = `${timestamp}-${name}.ts`;
   const filepath = path.join(migrationsDir, filename);
