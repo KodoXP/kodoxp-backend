@@ -1,6 +1,8 @@
 import { UsersAttributes, UsersCreate } from "@/dtos/user-dto";
 import { DataTypes, Model } from "sequelize";
 import sequelize from "@/config/sequelize";
+import Tasks from "./tasks";
+import Rewards from "./rewards";
 
 class User extends Model<UsersAttributes, UsersCreate> {
   public id!: string;
@@ -11,6 +13,9 @@ class User extends Model<UsersAttributes, UsersCreate> {
   public zipcode!: string;
   public email!: string;
   public isActive!: boolean;
+
+  public taks!: Tasks[];
+  public rewards!: Rewards[];
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
