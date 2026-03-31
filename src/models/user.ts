@@ -51,7 +51,7 @@ User.init(
     cpf: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [11, 14],
       },
