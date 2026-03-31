@@ -11,4 +11,4 @@ export interface UsersAttributes {
   isActive: boolean;
 }
 
-export interface UsersCreate extends Optional<UsersAttributes, "id" | "isActive"> {}
+export interface UsersCreate extends Optional<UsersAttributes, "id" | "isActive" | "cpf"> {}
