@@ -10,7 +10,9 @@
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
     "migrate": "ts-node src/scripts/migrate.ts",
-    "create-migration": "ts-node src/scripts/createMigration.ts"
+    "create-migration": "tsx src/scripts/createMigration.ts",
+    "up:services": "docker compose up -d",
+    "down:services": "docker down -v"
   },
   "type": "commonjs",
   "dependencies": {
