@@ -1,10 +1,9 @@
+import { RewardAttributes, RewardCreate, RewardCategory } from "@/dtos/rewards-dto";
 import { DataTypes, Model } from "sequelize";
 import sequelize from "@/config/sequelize";
 import User from "./user";
 
-export type RewardCategory = "GAMES" | "REDE SOCIAL" | "COMIDA" | "OUTROS";
-
-class Rewards extends Model {
+class Rewards extends Model<RewardAttributes, RewardCreate> {
   public id!: string;
   public user_id!: string; // FK
   public title!: string;
@@ -12,7 +11,7 @@ class Rewards extends Model {
   public points_cost!: number;
   public stock!: number;
   public is_active!: boolean;
-  public category!: RewardCategory;
+  public category!: RewardCategory // type importado do dto;
   public expiration_date!: Date;
   public image_url!: string;
 
