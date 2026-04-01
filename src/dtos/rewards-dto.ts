@@ -1,7 +1,16 @@
 import { Optional } from "sequelize";
 
-export type RewardCategory = "GAMES" | "REDE SOCIAL" | "COMIDA" | "OUTROS";
-
+export enum RewardCategory {
+  GAMES = "GAMES",
+  SOCIAL_MEDIA = "SOCIAL_MEDIA",
+  FOOD = "FOOD",
+  ENTERTAINMENT = "ENTERTAINMENT",
+  SHOPPING = "SHOPPING",          
+  HOBBIES = "HOBBIES",             
+  TRAVEL = "TRAVEL",               
+  OTHER = "OTHER",
+  UNDEFINED = "UNDEFINED"
+};
 export interface RewardAttributes {
   id: string;
   user_id: string;
