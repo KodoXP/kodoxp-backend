@@ -4,7 +4,7 @@ import path from "path";
 
 export const migrator = new Umzug({
   migrations: {
-    glob: path.join(__dirname, "../migrations/*.js"),
+    glob: path.join(__dirname, "../migrations/*.{ts,js}"),
   },
   context: sequelize.getQueryInterface(),
   storage: new SequelizeStorage({ sequelize }),
