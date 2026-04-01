@@ -55,8 +55,9 @@ Rewards.init(
       allowNull: false,
     },
     category: {
-      type: DataTypes.ENUM("GAMES" , "REDE SOCIAL" , "COMIDA" , "OUTROS"),
+      type: DataTypes.ENUM(...Object.values(RewardCategory)),
       allowNull: false,
+      defaultValue: RewardCategory.UNDEFINED
     },
     expiration_date: {
       type: DataTypes.DATE,
@@ -71,9 +72,5 @@ Rewards.init(
 );
 
 // define que a recompensa pertence à um user
-Rewards.belongsTo(User, {
-    foreignKey: "user_id",
-    as: "user"
-})
 
 export default Rewards;
