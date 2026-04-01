@@ -14,11 +14,11 @@ function generateMigration(name: string) {
 
   const template = `import { QueryInterface, DataTypes } from 'sequelize';
 
-export async function up(queryInterface: QueryInterface) {
+export async function up({ context: queryInterface }: { context: QueryInterface }) {
   // TODO: implement migration
 }
 
-export async function down(queryInterface: QueryInterface) {
+export async function down({ context: queryInterface }: { context: QueryInterface }) {
   // TODO: revert migration
 }
 `;
