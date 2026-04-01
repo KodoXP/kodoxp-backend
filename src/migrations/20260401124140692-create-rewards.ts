@@ -1,8 +1,8 @@
-import { QueryInterface, DataTypes } from 'sequelize';
-import { RewardCategory } from '@/dtos/rewards-dto';
+import { QueryInterface, DataTypes } from "sequelize";
+import { RewardCategory } from "@/dtos/rewards-dto";
 
-export async function up(queryInterface: QueryInterface) {
-  await queryInterface.createTable('rewards', {
+export async function up({ context: queryInterface }: { context: QueryInterface }) {
+  await queryInterface.createTable("rewards", {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -13,11 +13,11 @@ export async function up(queryInterface: QueryInterface) {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: 'users',
-        key: 'id',
+        model: "users",
+        key: "id",
       },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
     },
     title: {
       type: DataTypes.STRING(150),
@@ -65,5 +65,5 @@ export async function up(queryInterface: QueryInterface) {
 }
 
 export async function down(queryInterface: QueryInterface) {
-  await queryInterface.dropTable('rewards');
+  await queryInterface.dropTable("rewards");
 }

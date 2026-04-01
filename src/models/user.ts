@@ -12,7 +12,7 @@ class User extends Model<UsersAttributes, UsersCreate> {
   public password!: string;
   public zipcode!: string;
   public email!: string;
-  public isActive!: boolean;
+  public is_active!: boolean;
 
   public taks!: Tasks[];
   public rewards!: Rewards[];
@@ -60,7 +60,7 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    isActive: {
+    is_active: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
       allowNull: true,
@@ -73,5 +73,4 @@ User.init(
   { sequelize, tableName: "users", timestamps: true, underscored: true },
 );
 
-
-export default User; 
+export default User;
