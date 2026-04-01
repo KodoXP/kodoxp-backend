@@ -21,7 +21,7 @@ export class RewardRepository {
             where: { id },
         });
 
-        return destroyedReward > 1
+        return destroyedReward === 1
     }
 }
 
