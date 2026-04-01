@@ -1,5 +1,5 @@
 import { UsersAttributes, UsersCreate } from "@/dtos/user-dto";
-import { BadRequestError, ConflictError, NotFoundError } from "@/exceptions";
+import { ConflictError, NotFoundError } from "@/exceptions";
 import { UserRepository } from "@/repositories/user-repository";
 
 export class UserService {
@@ -10,28 +10,33 @@ export class UserService {
     if (!user) {
       throw new NotFoundError(`User with ID ${id} was not found.`);
     }
-
     return user;
   }
 
   public async findAll(): Promise<UsersAttributes[]> {
-    const users = await this.userRepository.findAll();
-    if (!users) {
-      return [];
-    }
-    return users;
+    return this.userRepository.findAll();
   }
 
   public async create(request: UsersCreate): Promise<UsersAttributes> {
-    if (!request) {
-      throw new BadRequestError(`Payload is empty`);
-    }
     const existsByEmail = await this.userRepository.existsByEmail(request.email);
     if (existsByEmail) {
-      throw new ConflictError(`There is already a person registered with this email address`);
+      throw new ConflictError(`There is already a user registered with this email address.`);
     }
+    return this.userRepository.create(request);
+  }
 
-    const create = await this.userRepository.create(request);
-    return create;
+  public async findByEmail(email: string): Promise<UsersAttributes> {
+    const user = await this.userRepository.findByEmail(email);
+    if (!user) {
+      throw new NotFoundError(`User with email "${email}" was not found.`);
+    }
+    return user;
+  }
+
+  public async deactivate(id: string): Promise<void> {
+    const wasDeactivated = await this.userRepository.desactive(id);
+    if (!wasDeactivated) {
+      throw new NotFoundError(`User with ID "${id}" was not found or is already inactive.`);
+    }
   }
 }

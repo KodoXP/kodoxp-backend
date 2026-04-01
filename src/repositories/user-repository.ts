@@ -1,5 +1,5 @@
 import { UsersCreate } from "@/dtos/user-dto";
-import User from "@/models/user"
+import User from "@/models/user";
 
 export class UserRepository {
   public async create(create: UsersCreate): Promise<User> {
@@ -22,5 +22,20 @@ export class UserRepository {
     });
 
     return count > 0;
+  }
+
+  public async findByEmail(email: string): Promise<User | null> {
+    return await User.findOne({
+      where: { email },
+    });
+  }
+
+  public async desactive(id: string): Promise<boolean> {
+    const [affectedRows] = await User.update(
+      { is_active: false },
+      { where: { id, is_active: true } },
+    );
+
+    return affectedRows > 0;
   }
 }

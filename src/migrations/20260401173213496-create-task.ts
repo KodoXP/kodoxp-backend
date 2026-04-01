@@ -1,26 +1,8 @@
-import { TaskFrequency, TasksAttributes, TasksCreate, TaskStatus } from "@/dtos/tasks-dto";
-import { DataTypes, Model } from "sequelize";
-import sequelize from "@/config/sequelize";
-import User from "./user";
+import { TaskFrequency, TaskStatus } from "@/dtos/tasks-dto";
+import { QueryInterface, DataTypes } from "sequelize";
 
-class Tasks extends Model<TasksAttributes, TasksCreate> {
-  public id!: string;
-  public user_id!: string;
-  public name!: string;
-  public description!: string | null;
-  public points!: number;
-  public target_completions!: number;
-  public frequency!: TaskFrequency;
-  public status!: TaskStatus;
-  public due_date!: Date | null;
-  public completed_at!: Date | null;
-
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-}
-
-Tasks.init(
-  {
+export async function up({ context: queryInterface }: { context: QueryInterface }) {
+  await queryInterface.createTable("tasks", {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -31,10 +13,11 @@ Tasks.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: User,
+        model: "users",
         key: "id",
       },
       onDelete: "CASCADE",
+      onUpdate: "CASCADE",
     },
     name: {
       type: DataTypes.STRING,
@@ -70,8 +53,22 @@ Tasks.init(
       type: DataTypes.DATE,
       allowNull: true,
     },
-  },
-  { sequelize, tableName: "tasks", timestamps: true, underscored: true },
-);
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+  });
 
-export default Tasks;
+  await queryInterface.addIndex("tasks", ["user_id"]);
+  await queryInterface.addIndex("tasks", ["status"]);
+}
+
+export async function down({ context: queryInterface }: { context: QueryInterface }) {
+  await queryInterface.dropTable("tasks");
+  await queryInterface.sequelize.query('DROP TYPE IF EXISTS "enum_tasks_frequency"');
+  await queryInterface.sequelize.query('DROP TYPE IF EXISTS "enum_tasks_status"');
+}
