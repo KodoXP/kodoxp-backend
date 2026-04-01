@@ -4,7 +4,6 @@ import sequelize from "./config/sequelize";
 import routes from "./routes/routes";
 import { runMigrations } from "./umzug/migrator";
 import { globalErrorHandler } from "./middlewares/globalErrorHandler";
-import { validateSchema } from "./middlewares/validate-schema";
 const app = express();
 const port = Number(process.env.PORT) || 8080;
 
