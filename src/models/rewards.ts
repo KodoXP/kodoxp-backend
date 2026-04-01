@@ -5,17 +5,17 @@ import User from "./user";
 
 class Rewards extends Model<RewardAttributes, RewardCreate> {
   public id!: string;
-  public user_id!: string; // FK
+  public user_id!: string;
   public title!: string;
   public description?: string;
   public points_cost!: number;
   public stock!: number;
   public is_active!: boolean;
-  public category!: RewardCategory // type importado do dto;
+  public category!: RewardCategory;
   public expiration_date!: Date;
   public image_url!: string;
 
-  public user!: User; // permite que Rewards tenha acesso aos dados do User
+  public user!: User;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -57,7 +57,7 @@ Rewards.init(
     category: {
       type: DataTypes.ENUM(...Object.values(RewardCategory)),
       allowNull: false,
-      defaultValue: RewardCategory.UNDEFINED
+      defaultValue: RewardCategory.UNDEFINED,
     },
     expiration_date: {
       type: DataTypes.DATE,
@@ -70,7 +70,5 @@ Rewards.init(
   },
   { sequelize, tableName: "rewards", timestamps: true, underscored: true },
 );
-
-// define que a recompensa pertence à um user
 
 export default Rewards;
