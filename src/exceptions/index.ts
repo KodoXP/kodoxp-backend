@@ -44,3 +44,26 @@ export class InternalServerError extends AppError {
     super(message, 500, "INTERNAL_SERVER_ERROR", details);
   }
 }
+
+export class HashingError extends AppError {
+  constructor(message = "An error occurred during password hashing.", details?: any) {
+    super(message, 500, "HASHING_ERROR", details);
+  }
+}
+export class TokenExpiredError extends AppError {
+  constructor(message = "Token has expired.", details?: any) {
+    super(message, 401, "TOKEN_EXPIRED", details);
+  }
+}
+
+export class TokenInvalidError extends AppError {
+  constructor(message = "Token is invalid or malformed.", details?: any) {
+    super(message, 401, "TOKEN_INVALID", details);
+  }
+}
+
+export class TokenRevokedError extends AppError {
+  constructor(message = "Token has been revoked.", details?: any) {
+    super(message, 401, "TOKEN_REVOKED", details);
+  }
+}
