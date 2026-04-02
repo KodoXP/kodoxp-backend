@@ -10,7 +10,7 @@ export class RewardService {
     return await this.rewardsRepository.create(request);
   }
 
-  public async findAll(): Promise<Rewards[]> {
+  public async findAll(): Promise<RewardAttributes[]> {
     return await this.rewardsRepository.findAll();
   }
 
