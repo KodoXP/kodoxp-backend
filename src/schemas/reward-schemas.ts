@@ -14,25 +14,25 @@ export const deleteSchema = z.object({
 
 export const createRewardSchema = z.object({
   body: z.object({
-    title: z
-    .string()
-    .min(3, "Title must be at least 3 characters long"),
+    title: z.string().min(3, "Title must be at least 3 characters long"),
 
-    description: z
-    .string()
-    .optional(),
+    description: z.string().optional(),
 
-    points_cost: z
-    .number()
-    .int()
-    .nonnegative("Points cost cannot be negative"),
+    points_cost: z.number().int().nonnegative("Points cost cannot be negative"),
 
-    category: z
-    .enum(["GAMES", "REDE SOCIAL", "COMIDA", "OUTROS"]),
+    category: z.enum([
+      "GAMES",
+      "SOCIAL_MEDIA",
+      "FOOD",
+      "ENTERTAINMENT",
+      "SHOPPING",
+      "HOBBIES",
+      "TRAVEL",
+      "OTHER",
+      "UNDEFINED",
+    ]),
 
-    expiration_date: z
-    .string()
-    .datetime(),
+    expiration_date: z.string().datetime(),
   }),
 });
 
