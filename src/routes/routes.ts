@@ -5,7 +5,7 @@ import rewardRoutes from "@/routes/reward-routes";
 const router = Router();
 
 router.use(healthRouters);
-router.use(userRouters);
-router.use(rewardRoutes);
+router.use("/users", userRouters);
+router.use("/rewards", rewardRoutes);
 
 export default router;
