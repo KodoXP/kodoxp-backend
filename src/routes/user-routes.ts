@@ -15,20 +15,16 @@ const userRepository = new UserRepository();
 const userService = new UserService(userRepository);
 const controller = new UserController(userService);
 
-router.get("/users", controller.findAll.bind(controller));
+router.get("/", controller.findAll.bind(controller));
+router.get("//:id", validateSchema(findByIdSchema, "params"), controller.findById.bind(controller));
 router.get(
-  "/users/:id",
-  validateSchema(findByIdSchema, "params"),
-  controller.findById.bind(controller),
-);
-router.get(
-  "/users/email/:email",
+  "/email/:email",
   validateSchema(findByEmailSchema, "params"),
   controller.findByEmail.bind(controller),
 );
 router.post("/users", validateSchema(createUserSchema, "body"), controller.create.bind(controller));
 router.patch(
-  "/users/:id/deactivate",
+  "/:id/deactivate",
   validateSchema(deactivateSchema, "params"),
   controller.deactivate.bind(controller),
 );
