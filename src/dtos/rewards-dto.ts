@@ -5,12 +5,12 @@ export enum RewardCategory {
   SOCIAL_MEDIA = "SOCIAL_MEDIA",
   FOOD = "FOOD",
   ENTERTAINMENT = "ENTERTAINMENT",
-  SHOPPING = "SHOPPING",          
-  HOBBIES = "HOBBIES",             
-  TRAVEL = "TRAVEL",               
+  SHOPPING = "SHOPPING",
+  HOBBIES = "HOBBIES",
+  TRAVEL = "TRAVEL",
   OTHER = "OTHER",
-  UNDEFINED = "UNDEFINED"
-};
+  UNDEFINED = "UNDEFINED",
+}
 export interface RewardAttributes {
   id: string;
   user_id: string;
@@ -24,4 +24,4 @@ export interface RewardAttributes {
   image_url: string;
 }
 
-export interface RewardCreate extends Optional<RewardAttributes, "id" | "is_active" > {}
+export interface RewardCreate extends Optional<RewardAttributes, "id" | "is_active"> {}
