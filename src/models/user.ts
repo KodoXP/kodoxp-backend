@@ -5,20 +5,21 @@ import Tasks from "./tasks";
 import Rewards from "./rewards";
 
 class User extends Model<UsersAttributes, UsersCreate> {
-  public id!: string;
-  public name!: string;
-  public cpf!: string;
-  public number!: string;
-  public password!: string;
-  public zipcode!: string;
-  public email!: string;
-  public is_active!: boolean;
+  declare id: string;
+  declare name: string;
+  declare cpf: string;
+  declare number: string;
+  declare password: string;
+  declare zipcode: string;
+  declare email: string;
+  declare is_active: boolean;
+  declare points: number;
 
-  public taks!: Tasks[];
-  public rewards!: Rewards[];
+  declare taks: Tasks[];
+  declare rewards: Rewards[];
 
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+  declare readonly createdAt: Date;
+  declare readonly updatedAt: Date;
 }
 
 User.init(
@@ -43,7 +44,7 @@ User.init(
     },
     number: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [10, 15],
       },
@@ -65,9 +66,14 @@ User.init(
       defaultValue: true,
       allowNull: true,
     },
+    points: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
     zipcode: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
   },
   { sequelize, tableName: "users", timestamps: true, underscored: true },
