@@ -1,5 +1,4 @@
 import { TaskService } from "@/services/task-service";
-import { UserService } from "@/services/user-service";
 import { Request, Response, NextFunction } from "express";
 
 export class TaskController {
