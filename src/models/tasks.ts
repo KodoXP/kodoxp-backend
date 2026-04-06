@@ -7,13 +7,13 @@ class Tasks extends Model<TasksAttributes, TasksCreate> {
   public id!: string;
   public user_id!: string;
   public name!: string;
-  public description!: string | null;
+  public description?: string;
   public points!: number;
   public target_completions!: number;
   public frequency!: TaskFrequency;
   public status!: TaskStatus;
-  public due_date!: Date | null;
-  public completed_at!: Date | null;
+  public due_date?: Date;
+  public completed_at?: Date;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
