@@ -21,6 +21,6 @@ export class TaskRepository {
       where: { id },
     });
 
-    return deletedTask === 1;
+    return deletedTask >= 1;
   }
 }
