@@ -3,29 +3,29 @@ import { TasksAttributes, TasksCreate } from "@/dtos/tasks-dto";
 import { TaskRepository } from "@/repositories/task-repository";
 
 export class TaskService {
-  constructor(private readonly tasksRespository: TaskRepository) {}
+  constructor(private readonly taskRespository: TaskRepository) {}
 
   public async findById(id: string): Promise<TasksAttributes> {
-    const tasks = await this.tasksRespository.findById(id);
-    if (!tasks) {
+    const task = await this.taskRespository.findById(id);
+    if (!task) {
       throw new NotFoundError(`Task with ID ${id} was not found.`);
     }
-    return tasks;
+    return task;
   }
 
   public async findAll(): Promise<TasksAttributes[]> {
-    return await this.tasksRespository.findAll();
+    return await this.taskRespository.findAll();
   }
 
   public async create(request: TasksCreate): Promise<TasksAttributes> {
-    return await this.tasksRespository.create(request);
+    return await this.taskRespository.create(request);
   }
 
   public async delete(id: string): Promise<boolean> {
-    const foundedTask = await this.tasksRespository.findById(id);
-    if (!foundedTask) {
+    const foundTask = await this.taskRespository.findById(id);
+    if (!foundTask) {
       throw new NotFoundError(`Task with ID ${id} was not found.`);
     }
-    return await this.tasksRespository.delete(id);
+    return await this.taskRespository.delete(id);
   }
 }
