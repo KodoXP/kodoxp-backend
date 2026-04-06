@@ -16,7 +16,7 @@ const userService = new UserService(userRepository);
 const controller = new UserController(userService);
 
 router.get("/", controller.findAll.bind(controller));
-router.get("//:id", validateSchema(findByIdSchema, "params"), controller.findById.bind(controller));
+router.get("/:id", validateSchema(findByIdSchema, "params"), controller.findById.bind(controller));
 router.get(
   "/email/:email",
   validateSchema(findByEmailSchema, "params"),

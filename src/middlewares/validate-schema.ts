@@ -1,13 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import { ZodSchema, ZodError } from "zod";
 
+type Target = "body" | "params" | "query" | "cookies";
+
 export const validateSchema =
-  (schema: ZodSchema, target: "body" | "params" | "query" = "body") =>
+  (schema: ZodSchema, target: Target = "body") =>
   (req: Request, res: Response, next: NextFunction) => {
     try {
       const validData = schema.parse(req[target]);
       req[target] = validData;
-
       next();
     } catch (err) {
       if (err instanceof ZodError) {
@@ -16,6 +17,7 @@ export const validateSchema =
           errors: err.flatten().fieldErrors,
         });
       }
+
       next(err);
     }
   };
