@@ -9,6 +9,10 @@ export interface UsersAttributes {
   password: string;
   zipcode: string;
   is_active: boolean;
+  points: number;
 }
 
-export interface UsersCreate extends Optional<UsersAttributes, "id" | "is_active" | "cpf"> {}
+export interface UsersCreate extends Optional<
+  UsersAttributes,
+  "id" | "is_active" | "cpf" | "points" | "number" | "zipcode"
+> {}
