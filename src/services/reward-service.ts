@@ -10,7 +10,7 @@ export class RewardService {
     return await this.rewardsRepository.create(request);
   }
 
-  public async findAll(): Promise<Rewards[]> {
+  public async findAll(): Promise<RewardAttributes[]> {
     return await this.rewardsRepository.findAll();
   }
 
@@ -23,8 +23,8 @@ export class RewardService {
   }
 
   public async delete(id: string): Promise<boolean> {
-    const foundedReward = await this.rewardsRepository.findById(id);
-    if (!foundedReward) {
+    const foundReward = await this.rewardsRepository.findById(id);
+    if (!foundReward) {
       throw new NotFoundError(`Reward with ID ${id} was not found.`);
     }
     return await this.rewardsRepository.delete(id);
