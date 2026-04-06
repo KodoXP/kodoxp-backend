@@ -43,20 +43,18 @@ export const createUserSchema = z.object({
       .string({ error: "Phone number is required" })
       .min(10, "Invalid phone number")
       .max(15)
-      .transform((val) => val.replace(/\D/g, "")),
+      .optional()
+      .transform((val) => val?.replace(/\D/g, "")),
 
     password: z
       .string({ error: "Password is required" })
-      .min(8, "Password must be at least 8 characters long")
-      .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-        "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
-      ),
+      .min(8, "Password must be at least 8 characters long"),
 
     zipcode: z
       .string({ error: "Zipcode is required" })
       .transform((val) => val.replace(/\D/g, ""))
-      .refine((val) => val.length === 8, "Zipcode must be exactly 8 digits"),
+      .optional()
+      .refine((val) => val?.length === 8, "Zipcode must be exactly 8 digits"),
 
     isActive: z.boolean().optional().default(true),
   }),
