@@ -51,4 +51,36 @@ export class UserController {
       next(error);
     }
   }
+
+  public async getPoints(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const points = await this.userService.getPoints(id);
+      res.status(200).json({ points });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public async givePoints(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const { points } = req.body;
+      const updatedPoints = await this.userService.givePoints({ id, points });
+      res.status(200).json({ points: updatedPoints });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public async removePoints(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const { points } = req.body;
+      const updatedPoints = await this.userService.removePoints({ id, points });
+      res.status(200).json({ points: updatedPoints });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
