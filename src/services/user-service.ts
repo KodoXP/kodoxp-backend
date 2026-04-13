@@ -1,4 +1,4 @@
-import { UsersAttributes, UsersCreate } from "@/dtos/user-dto";
+import { GivePoints, RemovePoints, UsersAttributes, UsersCreate } from "@/dtos/user-dto";
 import { ConflictError, NotFoundError } from "@/exceptions";
 import { UserRepository } from "@/repositories/user-repository";
 
@@ -38,5 +38,35 @@ export class UserService {
     if (!wasDeactivated) {
       throw new NotFoundError(`User with ID "${id}" was not found or is already inactive.`);
     }
+  }
+
+  public async getPoints(id: string): Promise<number> {
+    const points = await this.userRepository.getPoints(id);
+
+    if (!points) {
+      throw new NotFoundError(`User with ID "${id}" was not found`);
+    }
+
+    return points;
+  }
+
+  public async givePoints(payload: GivePoints) {
+    const affectedCount = await this.userRepository.givePoints(payload);
+
+    if (!affectedCount || affectedCount < 1) {
+      throw new NotFoundError(`User with ID "${payload.id}" was not found`);
+    }
+
+    return await this.getPoints(payload.id);
+  }
+
+  public async removePoints(payload: RemovePoints) {
+    const affectedCount = await this.userRepository.removePoints(payload);
+
+    if (!affectedCount || affectedCount < 1) {
+      throw new NotFoundError(`User with ID "${payload.id}" was not found`);
+    }
+
+    return await this.getPoints(payload.id);
   }
 }

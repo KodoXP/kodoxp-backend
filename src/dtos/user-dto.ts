@@ -16,3 +16,13 @@ export interface UsersCreate extends Optional<
   UsersAttributes,
   "id" | "is_active" | "cpf" | "points" | "number" | "zipcode"
 > {}
+
+export interface GivePoints {
+  id: string;
+  points: number;
+}
+
+export interface RemovePoints {
+  id: string;
+  points: number;
+}

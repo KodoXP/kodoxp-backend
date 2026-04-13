@@ -1,6 +1,6 @@
-import { UsersCreate } from "@/dtos/user-dto";
+import { GivePoints, UsersCreate } from "@/dtos/user-dto";
 import User from "@/models/user";
-
+type IncrementResult = [User[], number];
 export class UserRepository {
   public async create(create: UsersCreate): Promise<User> {
     return await User.create(create);
@@ -37,5 +37,31 @@ export class UserRepository {
     );
 
     return affectedRows > 0;
+  }
+
+  public async getPoints(id: string): Promise<number | undefined> {
+    const user = await User.findOne({
+      where: { id },
+    });
+
+    return user?.points;
+  }
+
+  public async givePoints(payload: GivePoints): Promise<number> {
+    const [, affectedCount] = (await User.increment("points", {
+      by: payload.points,
+      where: { id: payload.id },
+    })) as IncrementResult;
+
+    return affectedCount ?? 0;
+  }
+
+  public async removePoints(payload: GivePoints): Promise<number> {
+    const [, affectedCount] = (await User.decrement("points", {
+      by: payload.points,
+      where: { id: payload.id },
+    })) as IncrementResult;
+
+    return affectedCount ?? 0;
   }
 }

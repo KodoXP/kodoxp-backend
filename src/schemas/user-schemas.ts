@@ -60,4 +60,36 @@ export const createUserSchema = z.object({
   }),
 });
 
+export const getPointsSchema = z.object({
+  params: z.object({
+    id: z.string().uuid("Invalid UUID format"),
+  }),
+});
+
+export const givePointsSchema = z.object({
+  params: z.object({
+    id: z.string().uuid("Invalid UUID format"),
+  }),
+  body: z.object({
+    points: z
+      .number({ error: "Points is required" })
+      .int("Points must be an integer")
+      .positive("Points must be a positive number"),
+  }),
+});
+
+export const removePointsSchema = z.object({
+  params: z.object({
+    id: z.string().uuid("Invalid UUID format"),
+  }),
+  body: z.object({
+    points: z
+      .number({ error: "Points is required" })
+      .int("Points must be an integer")
+      .positive("Points must be a positive number"),
+  }),
+});
+
+export type GivePointsBody = z.infer<typeof givePointsSchema>["body"];
+export type RemovePointsBody = z.infer<typeof removePointsSchema>["body"];
 export type CreateUserBody = z.infer<typeof createUserSchema>["body"];

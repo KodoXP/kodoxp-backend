@@ -6,6 +6,9 @@ import {
   deactivateSchema,
   findByEmailSchema,
   findByIdSchema,
+  getPointsSchema,
+  removePointsSchema,
+  givePointsSchema,
 } from "@/schemas/user-schemas";
 import { UserService } from "@/services/user-service";
 import { Router } from "express";
@@ -29,4 +32,23 @@ router.patch(
   controller.deactivate.bind(controller),
 );
 
+router.get(
+  "/:id/points",
+  validateSchema(getPointsSchema, "params"),
+  controller.getPoints.bind(controller),
+);
+
+router.patch(
+  "/:id/points/give",
+  validateSchema(givePointsSchema, "params"),
+  validateSchema(givePointsSchema, "body"),
+  controller.givePoints.bind(controller),
+);
+
+router.patch(
+  "/:id/points/remove",
+  validateSchema(removePointsSchema, "params"),
+  validateSchema(removePointsSchema, "body"),
+  controller.removePoints.bind(controller),
+);
 export default router;

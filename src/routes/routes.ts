@@ -1,5 +1,5 @@
 import { Router } from "express";
-import healthRouters from "@/routes/health";
+import healthRouters from "@/routes/health-routes";
 import userRouters from "@/routes/user-routes";
 import rewardRoutes from "@/routes/reward-routes";
 import authRoutes from "@/routes/auth-routes";
